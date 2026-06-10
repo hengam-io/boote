@@ -1,0 +1,45 @@
+name: Bug report
+description: Something in boote behaves incorrectly.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: A clear, concise description of the bug — what you ran, what you expected, what you got.
+      placeholder: |
+        I ran `boote critique` on an idea and ...
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The minimum sequence that triggers the bug.
+      placeholder: |
+        1. `/plugin install boote`
+        2. `boote new "..."`
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: claude-version
+    attributes:
+      label: Claude Code version
+      description: Output of `claude --version`.
+      placeholder: "2.1.150"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "macOS 15.5 / Ubuntu 24.04 / Windows 11"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or output
+      description: Paste any error output. Scrub anything sensitive.
+      render: shell

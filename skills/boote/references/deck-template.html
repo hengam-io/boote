@@ -1,0 +1,164 @@
+<!doctype html>
+<!--
+  boote — interactive pitch-deck template (self-contained, no external dependencies).
+  How Claude should use this:
+    - Replace the {{...}} placeholders with the idea's content.
+    - One <section class="slide">...</section> per slide. The number of slides is open-ended.
+    - Suggested order (YC style): Title / Problem / Insight / Why now / Solution / Evidence / Market & Model / Risk / Ask.
+    - Tune the text to the audience (board = numeric/risk-led, team = motivating/simple).
+    - Redaction (SKILL.md present-step): include nothing confidential (sensitive financials, cap table, comp, performance observations). This file is shareable.
+    - No emoji.
+  Navigation: arrow keys or Space, number keys, the dots at the bottom, or scroll.
+-->
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{IDEA_NAME}} — pitch</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a22; --ink:#eef1f6; --muted:#9aa4b2;
+    --accent:#5b8cff; --accent2:#37d39b; --line:#2a3140; --warn:#e0a84e;
+    --maxw:980px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  .deck{height:100%;overflow:hidden;position:relative}
+  .track{height:100%;display:flex;flex-direction:column;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+  .slide{min-height:100%;flex:0 0 100%;display:flex;align-items:center;justify-content:center;padding:6vh 6vw}
+  .inner{width:100%;max-width:var(--maxw)}
+  h1{font-size:clamp(28px,5vw,52px);margin:0 0 .3em;line-height:1.2}
+  h2{font-size:clamp(22px,3.4vw,36px);margin:0 0 .6em;color:var(--accent)}
+  p,li{font-size:clamp(15px,2vw,21px);color:var(--ink)}
+  .muted{color:var(--muted)}
+  .tag{display:inline-block;font-size:14px;color:var(--accent2);
+    border:1px solid var(--line);border-radius:999px;padding:4px 14px;margin-bottom:18px}
+  .lead{font-size:clamp(18px,2.6vw,26px);color:var(--muted)}
+  ul{padding-inline-start:1.2em;margin:.4em 0}
+  li{margin:.45em 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{margin:0 0 .4em;font-size:18px;color:var(--accent2)}
+  .big{font-size:clamp(30px,6vw,64px);font-weight:700;color:var(--accent)}
+  .warn{color:var(--warn)}
+  .src{font-size:13px;color:var(--muted);margin-top:6px}
+  .ask{background:linear-gradient(135deg,#1b2740,#16231c);border:1px solid var(--line);
+    border-radius:16px;padding:28px}
+  /* nav */
+  .dots{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:5}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--line);border:0;cursor:pointer;padding:0}
+  .dot.active{background:var(--accent)}
+  .pager{position:fixed;bottom:16px;left:20px;color:var(--muted);font-size:13px;z-index:5}
+  .hint{position:fixed;bottom:16px;right:20px;color:var(--muted);font-size:13px;z-index:5}
+  .bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:6;transition:width .3s}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="deck">
+  <div class="track" id="track">
+
+    <!-- Slide 1: title -->
+    <section class="slide"><div class="inner">
+      <div class="tag">{{HORIZON}} · v{{VERSION}} · {{DATE}}</div>
+      <h1>{{IDEA_NAME}}</h1>
+      <p class="lead">{{TAGLINE}}</p>
+    </div></section>
+
+    <!-- Slide 2: problem -->
+    <section class="slide"><div class="inner">
+      <h2>Problem</h2>
+      <p>{{PROBLEM_WHO_AND_PAIN}}</p>
+      <p class="muted">{{PROBLEM_EVIDENCE_OR_QUOTE}}</p>
+    </div></section>
+
+    <!-- Slide 3: insight -->
+    <section class="slide"><div class="inner">
+      <h2>Insight</h2>
+      <p class="lead">{{INSIGHT}}</p>
+    </div></section>
+
+    <!-- Slide 4: why now -->
+    <section class="slide"><div class="inner">
+      <h2>Why now</h2>
+      <p>{{WHY_NOW}}</p>
+    </div></section>
+
+    <!-- Slide 5: solution -->
+    <section class="slide"><div class="inner">
+      <h2>Solution</h2>
+      <p>{{SOLUTION}}</p>
+    </div></section>
+
+    <!-- Slide 6: evidence -->
+    <section class="slide"><div class="inner">
+      <h2>Evidence so far</h2>
+      <ul>{{EVIDENCE_BULLETS}}</ul>
+    </div></section>
+
+    <!-- Slide 7: market & model -->
+    <section class="slide"><div class="inner">
+      <h2>Market &amp; model</h2>
+      <div class="grid">
+        <div class="card"><h3>Market size</h3><div class="big">{{MARKET_SIZE}}</div><div class="src">{{MARKET_SOURCE}}</div></div>
+        <div class="card"><h3>Revenue model</h3><p>{{BUSINESS_MODEL}}</p></div>
+      </div>
+    </div></section>
+
+    <!-- Slide 8: risk -->
+    <section class="slide"><div class="inner">
+      <h2>Biggest risk</h2>
+      <p class="warn">{{RISKIEST_ASSUMPTION}}</p>
+      <p class="muted">How we test it: {{RISK_TEST}}</p>
+    </div></section>
+
+    <!-- Slide 9: the ask -->
+    <section class="slide"><div class="inner">
+      <div class="ask">
+        <h2>The ask</h2>
+        <p>{{ASK}}</p>
+      </div>
+    </div></section>
+
+  </div>
+</div>
+
+<div class="pager"><span id="cur">1</span> / <span id="total">9</span></div>
+<div class="dots" id="dots"></div>
+<div class="hint">← → or Space</div>
+
+<script>
+  var track=document.getElementById('track');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var n=slides.length, i=0;
+  document.getElementById('total').textContent=n;
+  var dots=document.getElementById('dots');
+  slides.forEach(function(_,k){
+    var b=document.createElement('button');b.className='dot'+(k===0?' active':'');
+    b.onclick=function(){go(k)};dots.appendChild(b);
+  });
+  function go(k){
+    i=Math.max(0,Math.min(n-1,k));
+    track.style.transform='translateY('+(-100*i)+'%)';
+    document.getElementById('cur').textContent=i+1;
+    document.getElementById('bar').style.width=((i+1)/n*100)+'%';
+    [].forEach.call(dots.children,function(d,j){d.className='dot'+(j===i?' active':'')});
+  }
+  function next(){go(i+1)} function prev(){go(i-1)}
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ')(e.preventDefault(),next());
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp')(e.preventDefault(),prev());
+    else if(e.key>='1'&&e.key<='9')go(parseInt(e.key,10)-1);
+  });
+  var sy=null;
+  window.addEventListener('wheel',function(e){
+    if(Math.abs(e.deltaY)<30)return;
+    if(sy)return; sy=setTimeout(function(){sy=null},500);
+    e.deltaY>0?next():prev();
+  },{passive:true});
+  go(0);
+</script>
+</body>
+</html>
