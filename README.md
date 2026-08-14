@@ -7,7 +7,7 @@ Pressure-test a raw idea stage by stage like an experienced YC / Techstars mento
 
 [![CI](https://github.com/hengam-io/boote/actions/workflows/ci.yml/badge.svg)](https://github.com/hengam-io/boote/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Plugin version](https://img.shields.io/badge/plugin-v2.1.0-5b8cff.svg)](.claude-plugin/plugin.json)
+[![Plugin version](https://img.shields.io/badge/plugin-v2.2.0-5b8cff.svg)](.claude-plugin/plugin.json)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-37d39b.svg)](https://docs.claude.com/en/docs/claude-code/plugins)
 
 </div>
@@ -66,6 +66,19 @@ It is **Gemini-powered and paid** — distinct from Anthropic's built-in `/deep-
 ```
 
 Reach for it when you want a researched, sourced answer and don't want the mentor pipeline; `boote research` is the same engine *inside* an idea's workspace (it folds findings into the dossier). Same engine, no duplicated code; needs `GEMINI_API_KEY`. The report is raw researched facts, not professional legal/medical/financial advice.
+
+## Customer-discovery interviews — `/boote:discovery`
+
+The evidence gate keeps saying the same thing: *go talk to users.* **`/boote:discovery`** is the skill that makes those conversations count. From an idea's dossier it generates a ready-to-run, **Mom Test-disciplined interview kit** — screener, 60-second opening + consent, a JTBD-style timeline reconstruction of the last real episode, non-leading probes mapped to each pain hypothesis (each with "the signal we listen for" and "what would disprove it"), workaround-and-cost digging, a commitment ladder (time / reputation / money), a snowball close, and a debrief form — written in the language the interviews will actually run in. After each conversation, **`debrief`** turns raw notes into a structured evidence file (facts, verbatim quotes, pain signals, commitments — interpretation kept separate) and updates the dossier's `evidence_level` honestly; **`synth`** finds patterns across three or more interviews and proposes what they mean for the riskiest assumption.
+
+```text
+/boote:discovery                            # interview kit for the active idea (or it asks which)
+/boote:discovery my-idea                    # kit for a specific idea by slug
+"I talked to a buyer yesterday — log it"    # debrief mode
+"synthesize my interviews"                  # synth mode
+```
+
+Grounded in a sourced methodology bundled with the skill: The Mom Test, YC's "How to Talk to Users", Steve Blank's customer discovery, Lean Customer Development, Deploy Empathy, and JTBD switch interviews. It never pitches the idea in a discovery interview, never counts praise as evidence, and never bumps the dossier version — judgment stays with `boote critique`.
 
 ## Replying to the person who gave you the idea
 
@@ -196,6 +209,12 @@ skills/reply/
 skills/gemini-research-paid/
   SKILL.md               separate, standalone: paid Gemini research on ANY topic (also the engine behind `boote research`)
 
+skills/discovery/
+  SKILL.md               separate: interview kits + evidence logging + synthesis for customer discovery
+  references/
+    interview-methodology.md  the sourced interviewing brain (Mom Test, YC, Blank, Alvarez, Hansen, JTBD, bias traps)
+    kit-template.md           the kit / evidence-file / synthesis skeletons
+
 agents/
   boote-critic.md        harsh-but-fair YC/Techstars critique
   boote-economist.md     bottom-up financial model + economic verdict
@@ -251,7 +270,7 @@ See [`SECURITY.md`](SECURITY.md) for vulnerability reporting.
 
 ## Project status
 
-This is **v2.1.0** — the v2.0.0 methodology and structure overhaul (the validation ladder, the evidence gate, required host context via `boote init`) plus the standalone `gemini-research-paid` skill. It is solo-maintained and used in production by its author. **Breaking vs v1.0.0:** a project with no host context is now `blocked` until `boote init` runs (or context-light is opted into explicitly). The surface area (sub-commands, reference files, agents) is otherwise stable and won't change in a breaking way without a major-version bump. Track changes in [`CHANGELOG.md`](CHANGELOG.md).
+This is **v2.2.0** — the v2.0.0 methodology and structure overhaul (the validation ladder, the evidence gate, required host context via `boote init`), the standalone `gemini-research-paid` skill, and the `discovery` customer-interview skill (kits, evidence logging, synthesis). It is solo-maintained and used in production by its author. **Breaking vs v1.0.0:** a project with no host context is now `blocked` until `boote init` runs (or context-light is opted into explicitly). The surface area (sub-commands, reference files, agents) is otherwise stable and won't change in a breaking way without a major-version bump. Track changes in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Contributing
 

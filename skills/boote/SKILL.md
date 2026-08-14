@@ -57,13 +57,13 @@ Walk the owner through the required context (see [`references/context-discovery.
 4. Open `rounds/round-1.md` with the initial state.
 
 ### `clarify` — keep clarifying
-Open with the office-hours re-anchor ([`references/methodology.md`](references/methodology.md) §12) if the idea already exists, then take the dossier's open `[unknown — blocking]` fields, ask the 3–5 most important, and fold answers in. Don't bump the version yet.
+Open with the office-hours re-anchor ([`references/methodology.md`](references/methodology.md) §12) if the idea already exists, then take the dossier's open `[unknown — blocking]` fields, ask the 3–5 most important, and fold answers in. Don't bump the version yet. When the answers point at user conversations as the next step, generate the interview kit with the sibling skill **`boote:discovery`** instead of leaving "go talk to users" abstract.
 
 ### `critique` — the hard critique
 1. Call subagent **`boote-critic`** with the dossier path (+ the `learnings` path + resolved host-context paths). It places the idea on the **validation ladder**, applies the **evidence gate** (no real user evidence → Problem capped, no confident `continue`), and returns: thesis, fatal flaws, hidden assumptions, the single riskiest assumption to test next + its cheapest test, missing evidence/numbers (as research questions), what would make it a yes, the rubric score, the **current rung + the gate to the next rung (often which rung to go back to)**, and a `continue`/`pivot`/`kill` verdict + confidence.
 2. If the critic flags missing numbers → run a `research` per flagged question (parallel below).
 3. Write the critique into `rounds/round-N.md` and update the dossier's `validation_stage`, `evidence_level`, `riskiest_assumption`, and open questions. **Don't redesign the dossier yet** — that's `refine`.
-4. Give the owner the gist: stage + evidence level, verdict + top three flaws, and the recommended next step (for `evidence_level: none`, that step is "talk to ~10 [persona] about the last time they hit this").
+4. Give the owner the gist: stage + evidence level, verdict + top three flaws, and the recommended next step (for `evidence_level: none`, that step is "talk to ~10 [persona] about the last time they hit this" — generate the kit and log the evidence with **`boote:discovery`**).
 
 > To write back to the person who brought you the idea — your honest read plus either an invitation to develop it further (`iterate`) or a pass (`pass`) — run the separate **`/reply`** skill. It turns this critique into a direct, sourced, jargon-free email (and never sends). boote does not auto-invoke it.
 
@@ -148,6 +148,7 @@ Table of all `<workspace>/*/` idea folders (excluding `_*`): name, slug, **stage
 ## Dependencies
 - **Scripts (bundled):** `scripts/discover-context.sh` (context + gate). The paid Gemini research engine (`scripts/deep-research.sh` + `scripts/research_engine.py`; needs `GEMINI_API_KEY`) is fronted by the **`boote:gemini-research-paid`** skill — `research` invokes that skill, not the script directly.
 - **Sibling skill (bundled):** `boote:gemini-research-paid` ([`skills/gemini-research-paid/`](gemini-research-paid/SKILL.md)) — standalone paid Gemini research; also the engine behind `research`.
+- **Sibling skill (bundled):** `boote:discovery` ([`skills/discovery/`](../discovery/SKILL.md)) — interview kits, evidence logging, and cross-interview synthesis for customer discovery; the operational arm of the evidence gate.
 - **Subagents (bundled):** `boote-critic` (critique), `boote-economist` (financial model), `boote-namer` (name and identity).
 - **`references/`:** `context-discovery.md`, `methodology.md`, `critique-rubric.md`, `dossier-template.md`, `economics-methodology.md`, `financial-model-template.md`, `intake-questions.md`, `memo-template.md`, `deck-template.html`.
 - **Host (discovered, required):** `strategy` (+ hurdle) / `principles` (+ red lines) are required to lift the gate; `risks` / `learnings` / `output_style` / `voice` / `research_key` via `boote.config.md` or auto-discovery.

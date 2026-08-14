@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] — 2026-08-14
+
+### Added
+
+- **`/boote:discovery`** — a separate skill (`skills/discovery/`) that turns
+  customer-discovery conversations into evidence the validation ladder accepts.
+  Three modes, auto-detected from the ask:
+  - **`kit`** (default) generates a ready-to-run, Mom Test-disciplined
+    interview kit from the idea's dossier: screener, 60-second opening +
+    consent, a JTBD-style timeline reconstruction of the last real episode,
+    non-leading probes mapped to each pain hypothesis — each carrying a
+    "signal we listen for" and a "what would disprove it" line — workaround
+    and cost digging, a commitment ladder (time / reputation / money), a
+    snowball close, and a post-interview debrief form. Written in the language
+    the interviews actually run in; learning goals (max 3) confirmed with the
+    owner first.
+  - **`debrief`** logs a completed interview as a structured evidence file
+    (facts / verbatim quotes / pain signals / commitment given / interpretation
+    kept strictly separate) and updates the dossier's `evidence_level`
+    honestly — `interviews:N` counts only conversations that surfaced specific
+    past behavior; `commitments` only once real time/reputation/money
+    accumulated. Never bumps the dossier version (that stays `refine`'s job).
+  - **`synth`** finds patterns across three or more logged interviews (pain
+    repetition, hypothesis verdicts, persona heat, the four forces,
+    commitments collected) and proposes — never applies — the consequences
+    for `refine`/`critique`.
+  Ships a sourced methodology reference
+  (`references/interview-methodology.md`: The Mom Test, YC's "How to Talk to
+  Users", Steve Blank's customer discovery, Cindy Alvarez's Lean Customer
+  Development, Michele Hansen's Deploy Empathy, JTBD switch/timeline
+  interviews, and interview-bias traps) plus the kit / evidence-file /
+  synthesis skeletons (`references/kit-template.md`). Reuses
+  `discover-context.sh` (workspace / output_style / voice); the context gate
+  is noted, not enforced — the real precondition is a dossier with a persona
+  and at least one pain hypothesis. Hard rules: never pitch the idea in a
+  discovery interview, never count praise or hypotheticals as evidence,
+  consent + anonymization by default, PII minimized per the host
+  `output_style`.
+
+### Changed
+
+- **`boote` now routes to `/boote:discovery`** wherever the honest next step
+  is talking to users: `clarify` and `critique` point at the kit generator
+  instead of leaving "go talk to ~10 users" abstract, and the methodology's
+  evidence section (§5) references the skill. README documents the new skill;
+  plugin and marketplace manifests bumped to 2.2.0.
+
 ## [2.1.0] — 2026-06-09
 
 ### Added
@@ -144,5 +191,6 @@ Initial public release.
   interactive HTML deck template.
 - **`boote.config.example.md`** — documented template for the host-context map.
 
-[Unreleased]: https://github.com/hengam-io/boote/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/hengam-io/boote/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/hengam-io/boote/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/hengam-io/boote/releases/tag/v2.1.0
