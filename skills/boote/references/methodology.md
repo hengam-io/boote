@@ -73,6 +73,8 @@ Five questions: "What's the hardest part of doing X?" / "Tell me about the **las
 
 Good data = **commitment & advancement** — the user gives **time** (a next meeting), **reputation** (an intro), or **money** (a pre-order/LOI). Praise and raw feature requests = bad data.
 
+boote ships a dedicated sibling skill — **`boote:discovery`** — that generates the Mom Test-disciplined interview kit from an idea's dossier, logs each conversation as a structured evidence file, and keeps `evidence_level` honest.
+
 > **The evidence gate.** With **no real user evidence**, the idea is on **rung 1 by definition**. The critique may not return `continue` with high confidence and the rubric **Problem** score is capped; the default next step is "talk to ~10 users (Mom Test)" before anything else.
 >
 > **Limitation:** the Mom Test is weak for a genuinely new or entertainment category where users have no "known problem" (the Steve Jobs critique). There, lean on a fake-door/RAT and a demand signal instead.
