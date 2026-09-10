@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 2026-09-10
+
+### Fixed
+
+- **`discovery` and `gemini-research-paid` were loading with no metadata at
+  all.** Both wrote `description:` as an unquoted YAML scalar containing
+  `": "` -- inside a plain scalar YAML reads that as a nested mapping and
+  rejects the whole block. The loader's answer to unparseable frontmatter is
+  not to complain but to drop **every** field, so both skills shipped with no
+  name, no description and no triggers: they never fired on their own, and
+  nothing on disk looked wrong. Both descriptions are now single-quoted,
+  byte-for-byte the same text.
+
+### Added
+
+- **A release gate in CI, and tagging that is no longer a thing to remember.**
+  `claude plugin validate --strict` reads only the marketplace manifest and
+  passed both broken skills, so `claude plugin tag --dry-run` now runs on
+  every pull request: it is the check that reads the repo the way Claude Code
+  does, failing on frontmatter the loader cannot parse and on a `plugin.json`
+  version that disagrees with the marketplace entry. A new `release.yml` cuts
+  and pushes the `boote--v<version>` tag (and a GitHub release from this file)
+  whenever a merge to `main` lands a version that has no tag yet.
+
 ## [2.2.0] — 2026-08-14
 
 ### Added

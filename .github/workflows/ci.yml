@@ -43,3 +43,11 @@ jobs:
 
       - name: Validate plugin manifest
         run: claude plugin validate . --strict
+
+      - name: Plugin, versions and frontmatter agree
+        # validate --strict only reads the marketplace manifest. This is the check
+        # that reads the repo the way Claude Code does: it fails on a skill whose
+        # frontmatter the loader cannot parse (two of boote's did, and shipped with
+        # no metadata at all) and on a plugin.json version that disagrees with the
+        # marketplace entry. --dry-run creates nothing.
+        run: claude plugin tag --dry-run .

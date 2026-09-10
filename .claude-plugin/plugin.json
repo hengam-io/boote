@@ -1,7 +1,7 @@
 {
   "name": "boote",
   "displayName": "boote — idea incubator",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Context-free (but context-required) idea incubator for Claude Code. Pressure-tests a raw idea stage by stage like an experienced YC/Techstars mentor: tracks each idea on a 7-rung validation ladder and gates progress on real user evidence — clarify, critique hard (no flattery), run grounded deep research (Gemini), refine, build a financial model and economic verdict, name and brand it, then produce a one-page memo and an interactive HTML deck before you graduate or park it. Discovers and requires the host project's own strategy, principles, risks, and hurdle (set up via `boote init`) — no hardcoded company data.",
   "author": {
     "name": "Ali Rajool",
