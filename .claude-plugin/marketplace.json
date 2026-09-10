@@ -9,7 +9,7 @@
     {
       "name": "boote",
       "source": "./",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "category": "productivity",
       "description": "Incubate a raw idea stage by stage like an experienced YC/Techstars mentor. Tracks each idea on a 7-rung validation ladder and gates progress on real user evidence: clarify, critique hard, run grounded deep research (Gemini), refine, build the financial model and economic verdict, name and brand it, produce a one-page memo and interactive HTML deck, log feedback, then graduate or park. Discovers and requires the host project's own context (strategy, principles, risks, hurdle) via `boote init` — no hardcoded company data."
     }
